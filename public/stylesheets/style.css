@@ -1,0 +1,50 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#palette
+{
+	width : 50px;
+	overflow : hidden;
+	padding : 0px;
+	text-align : left;
+}
+			
+#palette ul
+{
+	-webkit-padding-start: 0px;
+	padding-left : 0px;
+}
+
+#palette ul li
+{
+	display : block;
+	border : 1px solid #333;
+	height : 20px;
+	width : 20px;
+	float : left;
+	margin : 0px;
+	text-align : left;
+}
+
+#tools ul li
+{
+	display : block;
+	border : 1px solid #333;
+	height : 20px;
+	width : 20px;
+	float : left;
+	margin : 0px;
+	text-align : left;
+}
+
+#tools ul li img
+{
+	height : 20px;
+	width : 20px;
+}
