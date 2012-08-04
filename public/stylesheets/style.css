@@ -1,12 +1,3 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
 #palette
 {
 	width : 50px;
@@ -25,10 +16,10 @@ a {
 {
 	display : block;
 	border : 1px solid #333;
-	height : 20px;
-	width : 20px;
+	height : 16px;
+	width : 32px;
 	float : left;
-	margin : 0px;
+	margin : 2px;
 	text-align : left;
 }
 
@@ -47,4 +38,12 @@ a {
 {
 	height : 20px;
 	width : 20px;
+}
+
+#pencil-primary-color, #pencil-alternate-color
+{
+    height: 16px;
+    width: 32px;
+    border: 1px solid #333;
+    margin: 2px;
 }

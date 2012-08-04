@@ -1,29 +1,46 @@
 define([
     'Underscore',
-    'Backbone'
-], function (_, Backbone) {
+    'Backbone',
+    'event-aggregator'
+], function (_, Backbone, eventAggregator) {
     var PaletteModel = Backbone.Model.extend({
-        defaults: {
-            data: {
+
+        initialize: function () {
+            eventAggregator.on("image:create", this.onImageCreated, this);
+        },
+
+        reset: function () {
+            this.data = {
                 name: 'Default',
                 colors: [
-                    { hexval: '#FFFFFF', index: 0 },
-                    { hexval: '#000000', index: 1 },
-                    { hexval: '#FF0000', index: 2 },
-                    { hexval: '#00FF00', index: 3 },
-                    { hexval: '#0000FF', index: 4 },
-                    { hexval: '#FFFF00', index: 5 }
+                    { hexval: undefined, index: 0 },
+                    { hexval: '#FFFFFF', index: 1 },
+                    { hexval: '#000000', index: 2 },
+                    { hexval: '#FF0000', index: 3 },
+                    { hexval: '#00FF00', index: 4 },
+                    { hexval: '#0000FF', index: 5 },
+                    { hexval: '#FFFF00', index: 6 }
                 ]
+            }
+
+            eventAggregator.trigger('palette:loaded', { data: this.data });
+            this.selectColor(0, 2);
+            this.selectColor(1, 0);
+        },
+
+        selectColor: function (slot, index) {
+            if (slot == 0) {
+                this.primarySelectedIndex = index
+                eventAggregator.trigger("palette:primaryColorSelected", { index: index, hexval: this.data.colors[index].hexval });
+            }
+            else if (slot == 1) {
+                this.alternateSelectedIndex = index
+                eventAggregator.trigger("palette:alternateColorSelected", { index: index, hexval: this.data.colors[index].hexval });
             }
         },
 
-        initialize: function () {
-            this.selectedIndex = 0;
-        },
-
-        selectColor: function (index) {
-            this.selectedIndex = index;
-            Backbone.Events.trigger("palette:colorSelected", { index: selectedIndex, hexvalue: data.colors[index] });
+        onImageCreated: function (ev) {
+            this.reset();
         }
     });
 

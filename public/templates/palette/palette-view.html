@@ -1,5 +1,9 @@
-<ul>
+<ul oncontextmenu="return false;">
   <% _.each(palette.colors, function(c){ %>
-   <li value='<%= c.index %>'><%= c.hexval %></li> 
+    <% if (c.hexval) { %>
+        <li value='<%= c.index %>' style='background-color: <%= c.hexval %>;'></li> 
+    <% } else { %>
+        <li value='<%= c.index %>' style='background-image: url("imgs/transparent.png"); background-repeat: repeat;'></li> 
+    <% } %>
   <% }); %>
 </ul>

@@ -9,6 +9,7 @@
     var ToolbarView = Backbone.View.extend({
         initialize: function () {
             this.model = new ToolBarModel();
+            this.model.initialize();
         },
 
         events: {
@@ -17,7 +18,7 @@
 
         render: function () {
             var data = {
-                toolbar: this.model.toJSON().data,
+                toolbar: this.model.data,
                 _: _
             };
 
@@ -27,9 +28,9 @@
         },
 
         select: function (ev) {
-            var col = $(ev.target).val();
-            this.model.selectColor(col);
+            var index = $(ev.target).closest('li').attr('val');
+            this.model.selectTool(index);
         }
     });
-    return new ToolbarView;
+    return ToolbarView;
 });

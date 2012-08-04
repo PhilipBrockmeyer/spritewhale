@@ -1,24 +1,26 @@
 ﻿define([
     'Underscore',
-    'Backbone'
-], function (_, Backbone) {
+    'Backbone',
+    'event-aggregator',
+    'models/pencil'
+], function (_, Backbone, eventAggregator, PencilModel) {
     var ToolbarModel = Backbone.Model.extend({
-        defaults: {
-            data: {
-                tools: [
-                    { name: 'pencil', img: 'pencil.png' },
-                    { name: 'fill', img: 'fill.png' },
-                ]
-            }
-        },
-
+        
         initialize: function () {
-            this.selectedTool = 'pencil';
+            this.data =
+                {
+                    tools: [
+                        { index: 0, name: 'pencil', img: 'pencil.png', model: new PencilModel() },
+                        { index: 1, name: 'fill', img: 'fill.png', model: new PencilModel() },
+                    ]
+                };
+
+            this.selectTool(0);
         },
 
-        selectTool: function (tool) {
-            this.selectedTool = tool;
-            Backbone.Events.trigger("toolbar:toolselected", { selectedTool: this.selectedTool });
+        selectTool: function (index) {
+            this.selectedTool = index;
+            eventAggregator.trigger("toolbar:toolSelected", { "tool": this.data.tools[index] });
         }
     });
 

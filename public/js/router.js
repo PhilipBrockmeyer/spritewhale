@@ -6,7 +6,7 @@ define([
   'views/home/main'
 ], function ($, _,
              Backbone,
-             mainHomeView) {
+             MainHomeView) {
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -29,6 +29,7 @@ define([
         },*/
         defaultAction: function (actions) {
             // We have no matching route, lets display the home page 
+            var mainHomeView = new MainHomeView({ el: $('#content').get(0) });
             mainHomeView.render();
         }
     });

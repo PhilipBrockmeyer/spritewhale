@@ -2,23 +2,31 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
+  'event-aggregator',
   'views/palette/palette-view',
   'views/tools/toolbar-view',
+  'views/tools/pencil-view',
+  'views/drawing-area/canvas-view',
   'text!templates/home/main.html'
-], function ($, _, Backbone, paletteView, toolbarView, mainHomeTemplate) {
+], function ($, _, Backbone, eventAggregator, PaletteView, ToolbarView, PencilView, CanvasView, mainHomeTemplate) {
 
-    var mainHomeView = Backbone.View.extend({
-        el: $("#content"),
-
+    var MainHomeView = Backbone.View.extend({
         render: function () {
-            this.el.html(mainHomeTemplate);
+            this.$el.html(mainHomeTemplate);
 
-            paletteView.el = $('#palette').get(0);
+            var paletteView = new PaletteView({ el: $('#palette').get(0) });
+            var toolbarView = new ToolbarView({ el: $('#tools').get(0) });
+            var pencilView = new PencilView({ el: $('#tool-options').get(0) });
+            var canvasView = new CanvasView({ el: $('#drawing-area').get(0) });
+
             paletteView.render();
-
-            toolbarView.el = $('#tools').get(0);
             toolbarView.render();
+            pencilView.render();
+            canvasView.render();
+
+            eventAggregator.trigger('image:create', { x: 16, y: 16 });
         }
     });
-    return new mainHomeView;
+
+    return MainHomeView;
 });
