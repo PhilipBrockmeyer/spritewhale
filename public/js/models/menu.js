@@ -10,7 +10,11 @@ define([
         },
 
         save: function () {
-            eventAggregator.trigger("menu:save");
+            eventAggregator.trigger("menu:save" );
+        },
+
+        load: function () {
+
         }
     });
 

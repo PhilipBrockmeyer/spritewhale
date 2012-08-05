@@ -1,13 +1,15 @@
 define([
+    'jQuery',
     'Underscore',
     'Backbone',
     'event-aggregator'
-], function (_, Backbone, eventAggregator) {
+], function ($, _, Backbone, eventAggregator) {
     var CanvasModel = Backbone.Model.extend({
 
         initialize: function () {
             eventAggregator.on('palette:loaded', this.onPaletteLoaded, this);
             eventAggregator.on('image:create', this.onImageCreated, this);
+            eventAggregator.on('menu:save', this.onSave, this);
 
             this.data =
             {
@@ -96,6 +98,16 @@ define([
 
             this.zoom = 32;
             this.refresh();
+        },
+
+        onSave: function (ev) {
+            $.ajax({
+                type: 'POST',
+                url: '/sprite',
+                data: this.data,
+                success: function (ev) { },
+                dataType: 'json'
+            });
         }
     });
 

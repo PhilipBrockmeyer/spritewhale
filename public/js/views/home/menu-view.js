@@ -13,7 +13,8 @@ define([
         },
 
         events: {
-            "click #save": "save"
+            "click #menu-save": "save",
+            "click #menu-load": "load"
         },
 
         render: function () {
@@ -25,6 +26,10 @@ define([
 
         save: function (ev) {
             this.model.save();
+        },
+        
+        load: function (ev) {
+            this.model.load();
         }
     });
     return MenuView;
