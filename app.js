@@ -32,20 +32,7 @@ app.post('/sprite', function (req, res) {
     console.log('save requested..');
 
     var mongo;
-    if (process.env.VCAP_SERVICES) {
-        var env = JSON.parse(process.env.VCAP_SERVICES);
-        mongo = env['mongodb-2.0'][0]['credentials'];
-    }
-    else {
-        mongo = {
-            "hostname": "localhost",
-            "port": 27017,
-            "username": "",
-            "password": "",
-            "name": "",
-            "db": "spritewhale"
-        }
-    }
+    var mongourl;
 
     var generate_mongo_url = function (obj) {
         obj.hostname = (obj.hostname || 'localhost');
@@ -60,7 +47,22 @@ app.post('/sprite', function (req, res) {
         }
     }
 
-    var mongourl = generate_mongo_url(mongo);
+    if (process.env.MONGOHQ_URL) {
+        mongourl = process.env.MONGOHQ_URL;
+    }
+    else {
+        mongo = {
+            "hostname": "localhost",
+            "port": 27017,
+            "username": "",
+            "password": "",
+            "name": "",
+            "db": "spritewhale"
+        }
+
+        mongourl = generate_mongo_url(mongo);
+    }
+
     console.log('database url: ' + mongourl);
 
     console.log('creating database object...');
@@ -71,8 +73,8 @@ app.post('/sprite', function (req, res) {
             coll.insert(req.body, { safe: true }, function (err) {
                 console.log('document saved...');
                 /*res.writeHead(200, {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
                 });*/
 
                 res.send({ result: 'success', id: 1 });
