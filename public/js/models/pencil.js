@@ -7,7 +7,8 @@
         initialize: function () {
             this.primaryPaletteIndex = 1;
             this.alternatePaletteIndex = 0;
-            this.color = '#FFFFFF';
+            this.primaryColor = '#FFFFFF';
+            this.alternateColor = undefined;
             this.isSelected = true;
 
             eventAggregator.on("palette:primaryColorSelected", this.onPrimaryColorSelected, this);
@@ -37,14 +38,14 @@
 
         onPrimaryColorSelected: function (ev) {
             this.primaryPaletteIndex = ev.index;
-            this.color = ev.hexval;
-            this.trigger('primaryColorSet', { color: this.color });
+            this.primaryColor = ev.hexval;
+            this.trigger('primaryColorSet', { color: this.primaryColor });
         },
 
         onAlternateColorSelected: function (ev) {
             this.alternatePaletteIndex = ev.index;
-            this.color = ev.hexval;
-            this.trigger('alternateColorSet', { color: this.color });
+            this.alternateColor = ev.hexval;
+            this.trigger('alternateColorSet', { color: this.alternateColor });
         }
 
     });

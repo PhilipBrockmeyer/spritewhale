@@ -2,16 +2,17 @@
     'Underscore',
     'Backbone',
     'event-aggregator',
-    'models/pencil'
-], function (_, Backbone, eventAggregator, PencilModel) {
+    'models/pencil',
+    'models/fill'
+], function (_, Backbone, eventAggregator, PencilModel, FillModel) {
     var ToolbarModel = Backbone.Model.extend({
         
         initialize: function () {
             this.data =
                 {
                     tools: [
-                        { index: 0, name: 'pencil', img: 'pencil.png', model: new PencilModel() },
-                        { index: 1, name: 'fill', img: 'fill.png', model: new PencilModel() },
+                        { index: 0, name: 'pencil', img: 'pencil.png' },
+                        { index: 1, name: 'fill', img: 'fill.png' },
                     ]
                 };
 

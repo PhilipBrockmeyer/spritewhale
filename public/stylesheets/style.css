@@ -40,7 +40,7 @@
 	width : 20px;
 }
 
-#pencil-primary-color, #pencil-alternate-color
+#pencil-primary-color, #pencil-alternate-color, .fill-color
 {
     height: 16px;
     width: 32px;

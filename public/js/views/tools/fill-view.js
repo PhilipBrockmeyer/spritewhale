@@ -3,13 +3,13 @@ define([
   'Underscore',
   'Backbone',
   'event-aggregator',
-  'models/pencil',
-  'text!templates/tools/pencil-view.html'
-], function ($, _, Backbone, eventAggregator, PencilModel, pencilViewTemplate) {
+  'models/fill',
+  'text!templates/tools/fill-view.html'
+], function ($, _, Backbone, eventAggregator, FillModel, fillViewTemplate) {
 
     var PencilView = Backbone.View.extend({
         initialize: function () {
-            this.model = new PencilModel();
+            this.model = new FillModel();
             eventAggregator.on("toolbar:toolSelected", this.select, this);
             this.model.on("primaryColorSet", this.onPrimaryColorSelected, this);
             this.model.on("alternateColorSet", this.onAlternateColorSelected, this);
@@ -20,21 +20,20 @@ define([
         },
 
         render: function () {
-            var compiledTemplate = _.template(pencilViewTemplate, {});
+            var compiledTemplate = _.template(fillViewTemplate, {});
             this.$el.html(compiledTemplate);
-            this.setColor(this.$el.find('#pencil-primary-color').get(0), this.model.primaryColor);
-            this.setColor(this.$el.find('#pencil-alternate-color').get(0), this.model.alternateColor);
+            this.setColor(this.$el.find('.fill-color').get(0), this.model.color);
+
             return this;
         },
 
         select: function (ev) {
-            if (ev.tool.name != 'pencil') {
+            if (ev.tool.name != 'fill') {
                 this.model.isSelected = false;
                 return false;
             }
 
             this.model.isSelected = true;
-
             this.render();
         },
 
@@ -50,12 +49,8 @@ define([
         },
 
         onPrimaryColorSelected: function (ev) {
-            this.setColor(this.$el.find('#pencil-primary-color').get(0), ev.color);
+            this.setColor(this.$el.find('.fill-color').get(0), ev.color);
         },
-
-        onAlternateColorSelected: function (ev) {
-            this.setColor(this.$el.find('#pencil-alternate-color').get(0), ev.color);
-        }
     });
 
     return PencilView;
