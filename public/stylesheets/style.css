@@ -1,9 +1,53 @@
+#body 
+{
+    text-align : center;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#container
+{
+    width: 1024px;
+    height: 1024px;
+    overflow: hidden;
+    text-align: left;
+    margin: auto;
+    position: relative;
+    background-color: #FEF8DB;
+}
+
 #palette
 {
-	width : 50px;
+    position:absolute;
+    top : 10px;
+    left : 10px;
+	width : 330px;
 	overflow : hidden;
 	padding : 0px;
 	text-align : left;
+}
+
+#drawing-area
+{
+    position: absolute;
+    top : 130px;
+    left : 10px;
+    height: 512px;
+    width: 512px;
+}
+
+#tool-options
+{
+    position: absolute;
+    top: 10px;
+    left: 540px;
+}
+
+#tools
+{
+    position: absolute;
+    top: 10px;
+    left: 800px;
 }
 			
 #palette ul
