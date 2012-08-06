@@ -10,7 +10,7 @@ define([
     var PaletteView = Backbone.View.extend({
         initialize: function () {
             this.model = new PaletteModel();
-            eventAggregator.on('palette:loaded', this.onPaletteLoaded, this);
+            eventAggregator.on('palette:created', this.onPaletteLoaded, this);
         },
 
         events: {

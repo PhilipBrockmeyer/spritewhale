@@ -2,14 +2,17 @@
   'jQuery',
   'Underscore',
   'Backbone',
+  'event-aggregator',
   'models/toolbar',
   'text!templates/tools/toolbar-view.html'
-], function ($, _, Backbone, ToolBarModel, toolbarViewTemplate) {
+], function ($, _, Backbone, eventAggregator, ToolBarModel, toolbarViewTemplate) {
 
     var ToolbarView = Backbone.View.extend({
         initialize: function () {
             this.model = new ToolBarModel();
             this.model.initialize();
+
+            eventAggregator.on("image:create", this.onImageCreated, this);
         },
 
         events: {
@@ -25,6 +28,10 @@
             var compiledTemplate = _.template(toolbarViewTemplate, data);
             $(this.el).html(compiledTemplate);
             return this;
+        },
+
+        onImageCreated: function (ev) {
+            this.render();
         },
 
         select: function (ev) {

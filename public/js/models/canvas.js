@@ -7,6 +7,7 @@ define([
     var CanvasModel = Backbone.Model.extend({
 
         initialize: function () {
+            eventAggregator.on('palette:created', this.onPaletteCreated, this);
             eventAggregator.on('palette:loaded', this.onPaletteLoaded, this);
             eventAggregator.on('image:create', this.onImageCreated, this);
             eventAggregator.on('menu:save', this.onSave, this);
@@ -68,6 +69,10 @@ define([
         onPaletteLoaded: function (ev) {
             this.setPalette(ev.data);
             this.refresh();
+        },
+
+        onPaletteCreated: function (ev) {
+            this.setPalette(ev.data);
         },
 
         onImageCreated: function (ev) {

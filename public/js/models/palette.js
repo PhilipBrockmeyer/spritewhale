@@ -48,7 +48,7 @@ define([
                 ]
             }
 
-            eventAggregator.trigger('palette:loaded', { data: this.data });
+            eventAggregator.trigger('palette:created', { data: this.data });
             this.selectColor(0, 1);
             this.selectColor(1, 0);
         },

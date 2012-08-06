@@ -24,12 +24,10 @@ define([
             var canvasView = new CanvasView({ el: $('#drawing-area').get(0) });
 
             menuView.render();
+            /*
             paletteView.render();
             toolbarView.render();
-            pencilView.render();
-            canvasView.render();
-
-            eventAggregator.trigger('image:create', { x: 16, y: 16 });
+            pencilView.render();*/
         }
     });
 

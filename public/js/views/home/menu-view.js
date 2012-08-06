@@ -13,6 +13,7 @@ define([
         },
 
         events: {
+            "click #menu-new": "create",
             "click #menu-save": "save",
             "click #menu-load": "load"
         },
@@ -24,10 +25,14 @@ define([
             return this;
         },
 
+        create: function (ev) {
+            this.model.create();
+        },
+
         save: function (ev) {
             this.model.save();
         },
-        
+
         load: function (ev) {
             this.model.load();
         }

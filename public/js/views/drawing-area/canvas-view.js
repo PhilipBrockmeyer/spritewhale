@@ -27,10 +27,11 @@ define([
             this.$el.html('<canvas oncontextmenu="return false;" height="512" width="512"></canvas>');
 
             this.ctx = this.$el.find('canvas').get(0).getContext("2d");
+
             this.transparentImage = document.createElement("img");
+            this.transparentImage.src = "imgs/transparent.png";
 
             var that = this;
-            this.transparentImage.src = "imgs/transparent.png";
 
             this.transparentImage.onload = function () {
                 that.patternRepeat = that.ctx.createPattern(that.transparentImage, "repeat");
@@ -78,6 +79,9 @@ define([
         },
 
         onMouseMove: function (ev) {
+            if (!this.model.zoom)
+                return;
+
             if (!this.leftButtonDown && !this.rightButtonDown)
                 return;
 
@@ -95,6 +99,9 @@ define([
         },
 
         onMouseDown: function (ev) {
+            if (!this.model.zoom)
+                return;
+
             if (ev.which === 1) this.leftButtonDown = true;
             if (ev.which === 3) this.rightButtonDown = true;
 
@@ -115,6 +122,9 @@ define([
         },
 
         onMouseUp: function (ev) {
+            if (!this.model.zoom)
+                return;
+
             if (ev.which === 1) this.leftButtonDown = false;
             if (ev.which === 3) this.rightButtonDown = false;
         },
@@ -131,6 +141,8 @@ define([
         },
 
         onImageRefreshed: function (ev) {
+            this.render();
+
             var index = 0;
 
             for (x = 0; x < ev.width; x++) {

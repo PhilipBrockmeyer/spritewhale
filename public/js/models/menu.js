@@ -9,8 +9,12 @@ define([
 
         },
 
+        create: function () {
+            eventAggregator.trigger("image:create", { name: 'untitled', width: 16, height: 16 } );
+        },
+
         save: function () {
-            eventAggregator.trigger("menu:save" );
+            eventAggregator.trigger("menu:save");
         },
 
         load: function () {
